@@ -6,23 +6,20 @@
 ### make the pi and get into it
 
 1. use the Raspberry Pi OS imager to flash your SD card. Choose 'raspberry pi other' and 'raspberry pi os lite'
-2. put a blank file called 'ssh' on the SD card
+2. put a blank file called 'ssh' on the SD card (included in this repo, download above)
 3. find the IP address of the Pi - you might need to log into the router to find this.
-4. (if you haven't previously done this) - reserve the IP address of the Pi on the router. Note this down!
+4. Reserve the IP address of the Pi on the router. You'll find this in DHCP settings somewhere. Note this down!
 5. ssh into the pi, using username ubuntu and password ubuntu `ssh pi@ipaddress`
 6. `sudo raspi-config` then System Options, Change Password. Esc to exit the config pane. `sudo reboot`
 7. ssh back in with the new password, to check it works. then `exit`
 8. use [Terminus](terminus.com) and set up the connection (IP address, username, password). Then connect in.
 
-### install first-time stuff
-
-all the below just needs to be installed once
-
-#### install docker
+### install docker
 
 1. `curl -fsSL https://get.docker.com -o get-docker.sh`
 2. `sudo sh get-docker.sh`
 3. `sudo usermod -aG docker pi`
+4. `sudo reboot` (this will kick you out)
 
 ### update the pi (do this monthly)
 
@@ -36,6 +33,7 @@ all the below just needs to be installed once
 these are taken from the AdGuard Home instructions [here](https://hub.docker.com/r/adguard/adguardhome), and the deploy command from [here](https://smarthomepursuits.com/deploy-adguard-home-docker-in-ubuntu/)
 
 If updating, run steps 1-4. If creating for the first time, do step 1, skip 2 and 3, then do from 4 onwards.
+You should update monthly.
 
 1. `sudo docker pull adguard/adguardhome` will pull the new image (it will say if it's pulled a newer version). If a newer version is pulled, follow the rest of these steps. If it isn't, stop here. If first time install, skip next 2 steps.
 2. stop the container with `sudo docker stop adguardhome`
@@ -46,9 +44,10 @@ If updating, run steps 1-4. If creating for the first time, do step 1, skip 2 an
 7. favourite the address in your browser and save password
 
 
-### update Home Assistant
+### install (or update) Home Assistant
 
 If updating, run steps 1-4. If creating for the first time, do step 1, skip 2 and 3, then do from 4 onwards.
+You should update monthly.
 
 1. `sudo docker pull homeassistant/home-assistant` will pull the new image (it will say if it's pulled a newer version). If a newer version is pulled, follow the rest of these steps. If it isn't, stop here.
 2. `docker stop home-assistant` will stop the container
@@ -67,9 +66,4 @@ If updating, run steps 1-4. If creating for the first time, do step 1, skip 2 an
 ### docker handy commands
 
 `docker container ls` shows all running containers
-
-
-### install Nessus
-1. `docker pull tenableofficial/nessus`
-2. `docker run --name "nessus" -d -p 8834:8834 tenableofficial/nessus`
 
