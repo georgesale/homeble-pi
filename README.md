@@ -42,6 +42,7 @@ You should update monthly.
 5. from another machine, browse to the IP of your Pi, with port 3000 at the end. http://ipaddress:3000/
 6. run the setup for AdGuard Home, save the username and password somewhere
 7. favourite the address in your browser and save password
+8. point your router's upstream DNS to the IP of the Pi and save
 
 
 ### install (or update) Home Assistant
